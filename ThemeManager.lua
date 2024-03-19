@@ -62,6 +62,7 @@ local ThemeManager = {} do
 	end
 
 	function ThemeManager:CreateThemeManager(groupbox)
+        print("Started")
 		groupbox:AddColorPicker('BackgroundColor', {Text = "Background Color"; Default = self.Library.Colors.Background });
 		groupbox:AddColorPicker('AccentColor', {Text = "Accent Color"; Default = self.Library.Colors.Active });
         groupbox:AddColorPicker('ItemBorderColor', {Text = "Outline Color"; Default = self.Library.Colors.ItemBorder });

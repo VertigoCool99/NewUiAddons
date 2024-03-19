@@ -70,6 +70,8 @@ local ThemeManager = {} do
         groupbox:AddColorPicker('DisabledTextColor', {Text = "Disabled Text Color";Default = self.Library.Colors.DisabledText });
         groupbox:AddColorPicker('RiskyTextColor', {Text = "Risky Text Color";Default = self.Library.Colors.Risky });
 
+        print("running")
+
 		local ThemesArray = {}
 		for Name, Theme in next, self.BuiltInThemes do
 			table.insert(ThemesArray, Name)

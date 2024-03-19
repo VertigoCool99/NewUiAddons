@@ -78,41 +78,41 @@ local ThemeManager = {} do
 		table.sort(ThemesArray, function(a, b) return self.BuiltInThemes[a][1] < self.BuiltInThemes[b][1] end)
 
 		groupbox:AddDivider()
-		groupbox:AddDropdown('ThemeManager_ThemeList', { Text = 'Themes', Values = ThemesArray, Default = 1 })
+		local ThemeManagerList = groupbox:AddDropdown('ThemeManager_ThemeList', { Text = 'Themes', Values = ThemesArray, Default = 1 })
 
 		groupbox:AddButton({Text='Set As Default', Func=function()
 			self:SaveDefault(Options.ThemeManager_ThemeList.Value)
 			self.Library:Notify({Title="Theme";Text=string.format('Set Default Theme To %q', Options.ThemeManager_ThemeList.Value);Duration=3})
 		end})
 
-		Options.ThemeManager_ThemeList:OnChanged(function()
+		Options.ThemeManagerList:OnChanged(function()
 			self:ApplyTheme(Options.ThemeManager_ThemeList.Value)
 		end)
 
 		groupbox:AddDivider()
-		groupbox:AddInput('ThemeManager_CustomThemeName', { Text = 'Custom Theme Name' })
-		groupbox:AddDropdown('ThemeManager_CustomThemeList', { Text = 'Custom Themes', Values = self:ReloadCustomThemes(), AllowNull = true, Default = 1 })
+		local CustomThemeName = groupbox:AddInput('ThemeManager_CustomThemeName', { Text = 'Custom Theme Name' })
+		local CustomThemeList =  groupbox:AddDropdown('ThemeManager_CustomThemeList', { Text = 'Custom Themes', Values = self:ReloadCustomThemes(), AllowNull = true, Default = 1 })
 		groupbox:AddDivider()
 		
 		groupbox:AddButton({Text='Save Theme', Func=function() 
-			self:SaveCustomTheme(Options.ThemeManager_CustomThemeName.Value)
+			self:SaveCustomTheme(CustomThemeName.Value)
 
-			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
-			Options.ThemeManager_CustomThemeList:SetValue(nil)
+			CustomThemeList:SetValues(self:ReloadCustomThemes())
+			CustomThemeList:SetValue(nil)
 		end})
         groupbox:AddButton({Text='Load Theme', Func=function() 
-            self:ApplyTheme(Options.ThemeManager_CustomThemeList.Value) 
+            self:ApplyTheme(CustomThemeList.Value) 
 		end})
 
         groupbox:AddButton({Text='Refresh List', Func=function() 
-            Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
-			Options.ThemeManager_CustomThemeList:SetValue(nil)
+            CustomThemeList:SetValues(self:ReloadCustomThemes())
+			CustomThemeList:SetValue(nil)
 		end})
 
         groupbox:AddButton({Text='Set As Default', Func=function() 
-			if Options.ThemeManager_CustomThemeList.Value ~= nil and Options.ThemeManager_CustomThemeList.Value ~= '' then
-				self:SaveDefault(Options.ThemeManager_CustomThemeList.Value)
-				self.Library:Notify(string.format('Set default theme to %q', Options.ThemeManager_CustomThemeList.Value))
+			if CustomThemeList.Value ~= nil and CustomThemeList.Value ~= '' then
+				self:SaveDefault(CustomThemeList.Value)
+				self.Library:Notify(string.format('Set default theme to %q', CustomThemeList.Value))
 			end
 		end})
 

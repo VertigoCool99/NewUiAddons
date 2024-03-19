@@ -80,10 +80,10 @@ local ThemeManager = {} do
 		groupbox:AddDivider()
 		groupbox:AddDropdown('ThemeManager_ThemeList', { Text = 'Themes', Values = ThemesArray, Default = 1 })
 
-		groupbox:AddButton('Set As Default', function()
+		groupbox:AddButton({Text='Set As Default', Func=function()
 			self:SaveDefault(Options.ThemeManager_ThemeList.Value)
 			self.Library:Notify({Title="Theme";Text=string.format('Set Default Theme To %q', Options.ThemeManager_ThemeList.Value);Duration=3})
-		end)
+		end})
 
 		Options.ThemeManager_ThemeList:OnChanged(function()
 			self:ApplyTheme(Options.ThemeManager_ThemeList.Value)

@@ -88,7 +88,7 @@ local ThemeManager = {} do
 		end})
 
 		ThemeManagerList:OnChanged(function()
-			self:ApplyTheme(OThemeManagerList.Value)
+			self:ApplyTheme(ThemeManagerList.Value)
 		end)
 
 		groupbox:AddDivider()

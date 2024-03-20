@@ -133,6 +133,7 @@ local ThemeManager = {} do
 
 	function ThemeManager:GetCustomTheme(file)
 		if file == nil then return nil end
+		print(file,self.Folder)
 		local path = self.Folder..file
 		if not isfile(path) then
 			return nil

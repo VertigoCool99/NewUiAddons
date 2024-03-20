@@ -62,7 +62,6 @@ local ThemeManager = {} do
 	end
 
 	function ThemeManager:CreateThemeManager(groupbox)
-        print("Started")
 		groupbox:AddColorPicker('BackgroundColor', {Text = "Background Color"; Default = self.Library.Colors.Background });
 		groupbox:AddColorPicker('AccentColor', {Text = "Accent Color"; Default = self.Library.Colors.Active });
         groupbox:AddColorPicker('ItemBorderColor', {Text = "Outline Color"; Default = self.Library.Colors.ItemBorder });
@@ -70,8 +69,6 @@ local ThemeManager = {} do
 		groupbox:AddColorPicker('TextColor', {Text = "Text Color";Default = self.Library.Colors.Text });
         groupbox:AddColorPicker('DisabledTextColor', {Text = "Disabled Text Color";Default = self.Library.Colors.DisabledText });
         groupbox:AddColorPicker('RiskyTextColor', {Text = "Risky Text Color";Default = self.Library.Colors.Risky });
-
-        print("running")
 
 		local ThemesArray = {}
 		for Name, Theme in next, self.BuiltInThemes do
@@ -135,6 +132,7 @@ local ThemeManager = {} do
 	end
 
 	function ThemeManager:GetCustomTheme(file)
+		if file == nil then return nil end
 		local path = self.Folder..file
 		if not isfile(path) then
 			return nil

@@ -51,6 +51,7 @@ local ThemeManager = {} do
 		end
 
 		if isDefault then
+			print(self.Options)
 			self.Options.ThemeManager_ThemeList:SetValue(theme)
 		else
 			self:ApplyTheme(theme)

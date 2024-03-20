@@ -6,6 +6,8 @@ local ThemeManager = {} do
 	ThemeManager.BuiltInThemes = {
 
 	}
+	Library = self.Library
+	Options = self.Options
 
 	function ThemeManager:ApplyTheme(theme)
 		local customThemeData = self:GetCustomTheme(theme)
@@ -28,10 +30,10 @@ local ThemeManager = {} do
 		local options = { "Background", "Active", "ItemBorder", "ItemBackground", "Text" , "DisabledText", "Risky"}
 		for i, field in next, options do
 			if Options and Options[field] then
-				self.Library[field] = Options[field].Value
+				Library[field] = Options[field].Value
 			end
 		end
-		self.Library.Functions:UpdateColors()
+		Library.Functions:UpdateColors()
 	end
 
 	function ThemeManager:LoadDefault()		
@@ -51,8 +53,7 @@ local ThemeManager = {} do
 		end
 
 		if isDefault then
-			print(self.Options)
-			self.Options.ThemeManager_ThemeList:SetValue(theme)
+			Options.ThemeManager_ThemeList:SetValue(theme)
 		else
 			self:ApplyTheme(theme)
 		end
@@ -152,7 +153,7 @@ local ThemeManager = {} do
 
 	function ThemeManager:SaveCustomTheme(file)
 		if file:gsub(' ', '') == '' then
-			return self.Library:Notify({Title="ERROR",Text='File Name Cannot Be nil',Duration=3})
+			return Library:Notify({Title="ERROR",Text='File Name Cannot Be nil',Duration=3})
 		end
 
 		local theme = {}
@@ -199,18 +200,18 @@ local ThemeManager = {} do
 	end
 
 	function ThemeManager:CreateGroupBox(tab)
-		assert(self.Library, 'Must Set ThemeManager.Library First!')
+		assert(Library, 'Must Set ThemeManager.Library First!')
 		return tab:AddLeftGroupbox('Themes')
 	end
 
 	function ThemeManager:ApplyToTab(tab)
-		assert(self.Library, 'Must Set ThemeManager.Library First!')
+		assert(Library, 'Must Set ThemeManager.Library First!')
 		local groupbox = self:CreateGroupBox(tab)
 		self:CreateThemeManager(groupbox)
 	end
 
 	function ThemeManager:ApplyToGroupbox(groupbox)
-		assert(self.Library, 'Must Set ThemeManager.Library First!')
+		assert(Library, 'Must Set ThemeManager.Library First!')
 		self:CreateThemeManager(groupbox)
 	end
 end
